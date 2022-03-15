@@ -25,7 +25,6 @@
 * Reproducibility best practices
 
 
-
 ---
 
 ## High Performance Computing Overview
