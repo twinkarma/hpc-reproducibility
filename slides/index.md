@@ -156,6 +156,7 @@ wget https://server.com/thedata
 Or download locally and scp to server, adding ssh settings to .ssh/config allows you to do this:
 
 ```bash
+# Run this command from your local machine
 scp mydata/path hpcname:~/
 ```
 
@@ -240,12 +241,113 @@ What packages are used in the submissions:
 
 Building software on the HPC is <strong><u>easy</u></strong>!
 
-<div class="fragment">
-It's building all the <strong><u>dependencies</u></strong> that's the hard part.
-</div>
- 
+```bash
+# Check for existing software/libraries
+module avail
+
+# Load your build tools and compilers
+# (module names are different on every HPC) 
+module load libraries/g++ cmake
+
+# Build your software
+./configure
+make
+```
 
 ---
+
+### Building software on the HPC: Dependencies
+
+It's building all the <strong><u>dependencies</u></strong> that's the hard part.
+
+---
+
+### Building software on the HPC: Dependencies
+
+e.g. here's a dependency tree for Tensorflow 2
+```
+tensorflow-gpu==2.1.0
+  - absl-py [required: >=0.7.0, installed: 0.9.0]
+    - six [required: Any, installed: 1.14.0]
+  - astor [required: >=0.6.0, installed: 0.8.1]
+  - gast [required: ==0.2.2, installed: 0.2.2]
+  - google-pasta [required: >=0.1.6, installed: 0.2.0]
+    - six [required: Any, installed: 1.14.0]
+  - grpcio [required: >=1.8.6, installed: 1.28.1]
+    - six [required: >=1.5.2, installed: 1.14.0]
+  - keras-applications [required: >=1.0.8, installed: 1.0.8]
+    - h5py [required: Any, installed: 2.10.0]
+      - numpy [required: >=1.7, installed: 1.18.2]
+      - six [required: Any, installed: 1.14.0]
+    - numpy [required: >=1.9.1, installed: 1.18.2]
+  - keras-preprocessing [required: >=1.1.0, installed: 1.1.0]
+    - numpy [required: >=1.9.1, installed: 1.18.2]
+    - six [required: >=1.9.0, installed: 1.14.0]
+  - numpy [required: >=1.16.0,<2.0, installed: 1.18.2]
+  - opt-einsum [required: >=2.3.2, installed: 3.2.0]
+    - numpy [required: >=1.7, installed: 1.18.2]
+  - protobuf [required: >=3.8.0, installed: 3.11.3]
+    - setuptools [required: Any, installed: 45.2.0.post20200210]
+    - six [required: >=1.9, installed: 1.14.0]
+  - scipy [required: ==1.4.1, installed: 1.4.1]
+    - numpy [required: >=1.13.3, installed: 1.18.2]
+  - six [required: >=1.12.0, installed: 1.14.0]
+  - tensorboard [required: >=2.1.0,<2.2.0, installed: 2.1.1]
+    - absl-py [required: >=0.4, installed: 0.9.0]
+      - six [required: Any, installed: 1.14.0]
+    - google-auth [required: >=1.6.3,<2, installed: 1.13.1]
+      - cachetools [required: >=2.0.0,<5.0, installed: 4.0.0]
+      - pyasn1-modules [required: >=0.2.1, installed: 0.2.8]
+        - pyasn1 [required: >=0.4.6,<0.5.0, installed: 0.4.8]
+      - rsa [required: >=3.1.4,<4.1, installed: 4.0]
+        - pyasn1 [required: >=0.1.3, installed: 0.4.8]
+      - setuptools [required: >=40.3.0, installed: 45.2.0.post20200210]
+      - six [required: >=1.9.0, installed: 1.14.0]
+    - google-auth-oauthlib [required: >=0.4.1,<0.5, installed: 0.4.1]
+      - google-auth [required: Any, installed: 1.13.1]
+        - cachetools [required: >=2.0.0,<5.0, installed: 4.0.0]
+        - pyasn1-modules [required: >=0.2.1, installed: 0.2.8]
+          - pyasn1 [required: >=0.4.6,<0.5.0, installed: 0.4.8]
+        - rsa [required: >=3.1.4,<4.1, installed: 4.0]
+          - pyasn1 [required: >=0.1.3, installed: 0.4.8]
+        - setuptools [required: >=40.3.0, installed: 45.2.0.post20200210]
+        - six [required: >=1.9.0, installed: 1.14.0]
+      - requests-oauthlib [required: >=0.7.0, installed: 1.3.0]
+        - oauthlib [required: >=3.0.0, installed: 3.1.0]
+        - requests [required: >=2.0.0, installed: 2.22.0]
+          - certifi [required: >=2017.4.17, installed: 2019.11.28]
+          - chardet [required: >=3.0.2,<3.1.0, installed: 3.0.4]
+          - idna [required: >=2.5,<2.9, installed: 2.8]
+          - urllib3 [required: >=1.21.1,<1.26,!=1.25.1,!=1.25.0, installed: 1.25.7]
+    - grpcio [required: >=1.24.3, installed: 1.28.1]
+      - six [required: >=1.5.2, installed: 1.14.0]
+    - markdown [required: >=2.6.8, installed: 3.2.1]
+      - setuptools [required: >=36, installed: 45.2.0.post20200210]
+    - numpy [required: >=1.12.0, installed: 1.18.2]
+    - protobuf [required: >=3.6.0, installed: 3.11.3]
+      - setuptools [required: Any, installed: 45.2.0.post20200210]
+      - six [required: >=1.9, installed: 1.14.0]
+    - requests [required: >=2.21.0,<3, installed: 2.22.0]
+      - certifi [required: >=2017.4.17, installed: 2019.11.28]
+      - chardet [required: >=3.0.2,<3.1.0, installed: 3.0.4]
+      - idna [required: >=2.5,<2.9, installed: 2.8]
+      - urllib3 [required: >=1.21.1,<1.26,!=1.25.1,!=1.25.0, installed: 1.25.7]
+    - setuptools [required: >=41.0.0, installed: 45.2.0.post20200210]
+    - six [required: >=1.10.0, installed: 1.14.0]
+    - werkzeug [required: >=0.11.15, installed: 0.15.4]
+    - wheel [required: >=0.26, installed: 0.34.2]
+```
+
+---
+
+### Building software on the HPC: Dependencies
+
+You'll probably find that you're missing some dependencies... Fortran? Boost? OpenBLAS? OpenCV? CUDA libs? etc. <!-- .element class="fragment" -->
+
+You might also run into problems installing the dependencies... incompatible glibc version, library conflicts, etc. <!-- .element class="fragment" -->
+
+---
+
 
 ### Building software on the HPC
 
@@ -264,10 +366,10 @@ So what are the alternatives? <!-- .element class="fragment" -->
 
 ### HPC specific package managers
 
-* [conda](https://docs.conda.io/en/latest/)
+* [conda (https://docs.conda.io)](https://docs.conda.io/en/latest/)
   * Pre-built packages for Pythons, R, etc.
   * If you're using Python or R, try conda first
-* [spack](https://spack.readthedocs.io/en/latest/)
+* [spack (https://spack.readthedocs.io)](https://spack.readthedocs.io/en/latest/)
   * Works similarly to `apt` or `yum`, mainly for C/C++ libraries
   * Optimised for HPCs, software is built locally and optimised to hardware
 
@@ -440,6 +542,23 @@ More resource requested means it's harder for the scheduler to find a slot for y
 
 ---
 
+<!-- .slide: data-background="assets/img/rse-logo.svg" -->
+<!-- .slide: data-background-opacity="0.1" -->
+
 ## Conclusion
 
+* You need to parallelise your tasks to take advantage of HPC
+* Use package mangers or containers when you can
+* Submit jobs, request only the resources you need
+* Follow reproducibility best practices in your own research:
+  * Use version control  
+  * Document your code and data
+  * Show your workings
+  * Try to do this from the start of the research
+
+---
+<!-- .slide: data-background="assets/img/rse-logo.svg" -->
+<!-- .slide: data-background-opacity="0.1" -->
+
+## Thanks for listening!
 
