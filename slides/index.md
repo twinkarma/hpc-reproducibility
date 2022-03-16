@@ -129,7 +129,24 @@ In reality:
 
 ### Paper
 
-Any suggestions on what to put here?
+<div style="display: flex">
+<div>
+
+* What are we trying to reproduce?
+  * Expected results
+  * Expected performance 
+  * Expected time to complete
+  * Workflow outline
+
+</div>
+<div>
+
+<img src="assets/img/paper-plangan.png" alt="Plangan paper" style="height: 70%; width: auto"/>
+
+</div>
+</div>
+
+
 
 ---
 
@@ -375,6 +392,8 @@ So what are the alternatives? <!-- .element class="fragment" -->
 
 ---
 
+<!-- .slide: data-background="assets/img/containers.jpg" -->
+<!-- .slide: data-background-opacity="0.1" -->
 ### Containers and HPC
 
 <div style="display: flex">
@@ -403,7 +422,7 @@ Containers
 * Containers requires less resource to run and are faster to launch than virtual machines (VMs) as it does not emulate the entire operating system
 * Possible to package data, and even entire workflows within the image
 * Possible to archive the entire image
-* Open MPI with infiniband, check with your local RSE
+* OpenMPI with infiniband needs extra drivers, check with your local RSE
 
 ---
 
