@@ -25,11 +25,21 @@ FAIR (Findable Accessible Interoperable Reusable)
     * Paper
     * Code/Software
     * Data
+  * Paper  
+  * Data
+    * Getting it on the cluster
+    * Processing
+    * Where should I put my data?
+      * Memory > Local SSD > Network SSD > Network storage
+      * Depending on dataset size it may be worth transferring your data to the local SSD
+      * Intermediates go to scratch tmp local SSD
+      * Don't forget to copy your results back to network storage 
   * Code/Software
     * Software packages
       * Commercial existing software
         * LAMMPS, GROMACS, SimpleMD, PLUMED
         * OpenFoam
+        * Matlab
         * Get your IT dept or RSEs to install them for you!
           * Architecture optimisation
           * interconnect interoperability MPI (infiniband?)
@@ -43,6 +53,7 @@ FAIR (Findable Accessible Interoperable Reusable)
           * Scipy
           * pytorch
         * Julia
+      * You're not an admin!
       * With what build tools?
         * Make & Cmake
       * Package managers
@@ -53,46 +64,28 @@ FAIR (Findable Accessible Interoperable Reusable)
           * Open MPI with infiniband check with your local RSE
           * Linux
           * Windows WSL
-  * Data
-  
-  
-
-
-
-* Software
-
-    
-  
-  * You're not an admin!
-  * Dependencies
-  * Package managers
-  * Containers (Singularity/Apptainer)
-    
-* Data
-    * Getting it on the cluster
-    * Processing    
-* Workflow
-  * Batch script, job scripts  
-  * The scheduler SLURM
-    * Submitting jobs
-      * things might not run live
-      * Request time, memory, resources that's needed
-      * Log outputs, Print useful logs in stages
-      * .sh Scripts
-    * Hardware
-      * Filesystem - Where to put your data?
-        * Spinning disk
-        * Fast storage? SSD? 
-        * Local storage SSD?
-        * RAM
-        * Consider for both input, intermediates and output
-      * Specilist hardware
-        * GPU
-        * FPGA?
-      * Interconnect
-        * Infiniband?
-        * MPI
-    * Parallisation, job arrays
+  * Workflow
+    * Batch script, job scripts  
+    * The scheduler SLURM
+      * Submitting jobs
+        * things might not run live
+        * Request time, memory, resources that's needed
+        * Log outputs, Print useful logs in stages
+        * .sh Scripts
+      * Hardware
+        * Filesystem - Where to put your data?
+          * Spinning disk
+          * Fast storage? SSD? 
+          * Local storage SSD?
+          * RAM
+          * Consider for both input, intermediates and output
+        * Specilist hardware
+          * GPU
+          * FPGA?
+        * Interconnect
+          * Infiniband?
+          * MPI
+      * Parallisation, job arrays
 * Best practices
   * Version control your code
     * Github
