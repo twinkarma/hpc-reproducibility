@@ -136,7 +136,11 @@ In reality:
   * Expected results
   * Expected performance 
   * Expected time to complete
-  * Workflow outline
+* Workflow outline
+  * Pre/post processing steps
+  * Parameters
+  * Software
+  * Dataset
 
 </div>
 <div>
@@ -240,6 +244,48 @@ What packages are used in the submissions:
 
 ---
 
+### Software packages
+
+HPCs use `modules` system to load software:
+
+```bash
+# Check for existing software/libraries
+$ module avail
+
+amber/20                       gromacs/2021.2         plumed/2.6.2
+autodock-gpu/1.5.2             gromacs/2021.5         pytorch/1.9.0
+emacs/27.1                     gromacs/2022    (D)    sox/14.4.2
+ffmpeg/4.2.2                   mdtraj/1.9.5           tensorflow/2.3.1
+gnuplot/5.2.8                  namd/2.14              tensorflow/2.7.0 (D)
+gromacs/2020.3                 namd/3.0-alpha7 (D)    tmux/3.2a        (D)
+gromacs/2020.4-plumed-2.6.2    nano/5.3               vim/8.2
+gromacs/2020.5-ramd-2.0        opencv/4.2.0
+gromacs/2021.1                 openmm/7.5.0
+
+```
+
+---
+
+### Software packages
+
+HPCs use `modules` system to load software:
+
+```bash
+# Load the software you want from the list 
+$ module load gromacs/2022
+
+# There's a default library (D) that gets loaded when
+# you don't specify a version, code below will also 
+# load gromacs 2022
+$ module load gromacs
+
+
+# Run gromacs...
+$ gmx ...
+```
+
+---
+
 ### Software as code: Languages survey
 
 * What languages did the submissions use?
@@ -259,16 +305,13 @@ What packages are used in the submissions:
 Building software on the HPC is <strong><u>easy</u></strong>!
 
 ```bash
-# Check for existing software/libraries
-module avail
-
 # Load your build tools and compilers
 # (module names are different on every HPC) 
-module load libraries/g++ cmake
+$ module load libraries/g++ cmake
 
 # Build your software
-./configure
-make
+$ ./configure
+$ make
 ```
 
 ---
@@ -389,6 +432,18 @@ So what are the alternatives? <!-- .element class="fragment" -->
 * [spack (https://spack.readthedocs.io)](https://spack.readthedocs.io/en/latest/)
   * Works similarly to `apt` or `yum`, mainly for C/C++ libraries
   * Optimised for HPCs, software is built locally and optimised to hardware
+  
+---
+
+### HPC specific package managers
+
+* Packages are built and installed entirely in you home directory
+* They can create virtual environments
+  * Easy to switch an entire set of installed software
+  * Provide a way to share list of installed software in each environment
+    * python virtualenv - `requirements.txt`    
+    * Conda - `environment.yml`
+    * Spack - `spack.yml` & `spack.lock`
 
 ---
 
@@ -456,10 +511,11 @@ Containers
 
 ### HPC Workflow
 
-* It can take time for your queued jobs to run
-* A node can be used by multiple users at the same time 
-* Individual CPU cores on HPC may be slower than your machine
-* Network storage is slower than SSD
+* Why are things running slower than my desktop?
+  * It can take time for your queued jobs to run
+  * A node can be used by multiple users at the same time 
+  * Individual CPU cores on HPC may be slower than your machine
+  * Network storage is slower than SSD
 
 ---
 
@@ -536,13 +592,17 @@ More resource requested means it's harder for the scheduler to find a slot for y
 
 ## Reproducibility best practices
 
-* Version Control Your Code and Data
-  * Git, Github for code
-  * Git LFS, DCV for data
+---
+
+### Reproducibility best practices
+
+* Version control your code and data
+  * Git with Github, Gitlab, Bitbucket, etc. for code
+  * Git, Git LFS, DCV, etc. for data
   
 ---
 
-## Reproducibility best practices
+### Reproducibility best practices
 
 * Document your code and data
   * Provide a `readme.md` at the root of your project/data folder
@@ -551,13 +611,23 @@ More resource requested means it's harder for the scheduler to find a slot for y
     * File/directory structure
     * Build instructions
     * Run instructions
-  
+
 ---
 
-## Reproducibility best practices
+### Reproducibility best practices
+
+<div style="display: flex">
+
+<div>
 
 * Show your workings
   * Jupyter notebooks, RMarkdown, etc. provide a way to combine text and code to show your scientific process
+  
+</div>
+<div>
+<img src="assets/img/notebook-example.png"/>
+</div>
+</div>
 
 ---
 
@@ -573,7 +643,7 @@ More resource requested means it's harder for the scheduler to find a slot for y
   * Use version control  
   * Document your code and data
   * Show your workings
-  * Try to do this from the start of the research
+  * Try to do this from the start of the research!
 
 ---
 <!-- .slide: data-background="assets/img/rse-logo.svg" -->
