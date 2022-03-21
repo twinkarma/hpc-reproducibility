@@ -4,7 +4,7 @@
   "description": "A talk on reproducibility on the HPC",
   "main": "index.js",
   "scripts": {
-    "build": "reveal-md slides/ --static _site",
+    "build": "reveal-md slides/ --static _site --static-dirs=slides/assets",
     "start": "reveal-md slides/ -w"
   },
   "repository": {
